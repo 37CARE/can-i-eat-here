@@ -28,9 +28,10 @@ Add comments asking questions on lines of code.
 ## Running The Software
 
 1. Clone the repo
-2. `bundle install --without production`
-3. `rerun -c rackup`
-4. Open it in your browser!
+1. `bundle install --without production`
+1. `cp .env.example .env`
+1. `rerun -c rackup`
+1. Open it in your browser!
 
 
 ## Deploying The Software
