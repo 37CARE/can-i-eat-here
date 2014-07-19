@@ -1,0 +1,13 @@
+<h2>Sign Up For An Account</h2>
+<form method="POST" action="/users">
+
+  <label>Email Address:
+    <input type="email" name="user[email]" value="<%= @user.email %>"/></label>
+
+  <label>Full Name:
+    <input type="text" name="user[name]" value="<%=@user.name%>" /></label>
+
+  <label>Password: <input type="password" name="user[password]" /></label>
+
+  <button>Sign Up</button>
+</form>
