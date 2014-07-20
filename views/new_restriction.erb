@@ -1,0 +1,8 @@
+<h2>Add a Restriction</h2>
+<form method="POST" action="/restrictions">
+  <label>Name:
+    <input type="text" name="restriction[name]" value="<%=@restriction.name%>" /></label>
+  <%= erb :_error, { :locals => { :model => @restriction, :field_name => :name } } %>
+
+  <button>Add Restriction</button>
+</form>

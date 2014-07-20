@@ -60,6 +60,21 @@ post "/restaurants" do
   end
 end
 
+get "/restrictions/new" do
+  @restriction = Restriction.new
+  erb :new_restriction
+end
+
+post "/restrictions" do
+  ensure_logged_in!
+  @restriction = current_user.created_restrictions.create(params["restriction"])
+  if @restriction.saved?
+    redirect "/"
+  else
+    erb :new_restriction
+  end
+end
+
 get "/session/new" do
   @login_attempt = User.new
   erb :new_session
