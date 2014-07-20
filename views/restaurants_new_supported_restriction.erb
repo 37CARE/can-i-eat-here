@@ -1,0 +1,16 @@
+<h2>Add a Supported Restriction to <%= @restaurant.name %></h2>
+<form method="POST" action="/restaurants/<%=@restaurant.id%>/supported_restrictions" >
+  <select name="supported_restriction[id]">
+  <% @available_restrictions.each do | restriction | %>
+    <option value="<%= restriction.id %>"><%= restriction.name %></option>
+  <% end %>
+  </select>
+  <button>Add Restriction</button>
+</form>
+<p>Not seeing what you want? <a href="/restrictions/new">Create a New Restriction</a></p>
+<h3>Current Restrictions</h3>
+<ul>
+  <% @restaurant.supported_restrictions.each do |restriction| %>
+    <li><%=restriction.name %></li>
+  <% end %>
+</ul>

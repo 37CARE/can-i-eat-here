@@ -30,6 +30,9 @@ get "/" do
   erb :home
 end
 
+#
+# USERS
+#
 get "/users/new" do
   @user = User.new
   erb :new_user
@@ -44,6 +47,9 @@ post "/users" do
   end
 end
 
+#
+# RESTAURANTS
+#
 get "/restaurants/new" do
   ensure_logged_in!
   @restaurant = current_user.restaurants.new
@@ -60,6 +66,31 @@ post "/restaurants" do
   end
 end
 
+# Think of "supported_restrictions" as a sub-directory of a given restaurant.
+# Any given restaurant can have many supported restrictions, so we nest the url
+# within that restaurant's "top level" directory.
+get "/restaurants/:restaurant_id/supported_restrictions/new" do
+  @restaurant = Restaurant.get(params["restaurant_id"])
+  @available_restrictions = Restriction.all
+  erb :restaurants_new_supported_restriction
+end
+
+post "/restaurants/:restaurant_id/supported_restrictions" do
+  restaurant = Restaurant.get(params["restaurant_id"])
+  restriction = Restriction.get(params["supported_restriction"]["id"])
+  # First we load both models from the database
+
+
+  restaurant.add_supported_restriction(restriction)
+  # Then we link them together with the function we wrote on the Restaurant
+  # model
+
+  redirect "/"
+end
+
+#
+# RESTRICTIONS
+#
 get "/restrictions/new" do
   @restriction = Restriction.new
   erb :new_restriction
@@ -75,6 +106,10 @@ post "/restrictions" do
   end
 end
 
+
+#
+# SESSION
+#
 get "/session/new" do
   @login_attempt = User.new
   erb :new_session
