@@ -5,7 +5,7 @@ require_relative 'models'
 
 helpers do
   def current_user
-    @current_user ||= User.find(session[:current_user])
+    @current_user ||= User.get(session[:current_user])
   end
 
   def login(user)
