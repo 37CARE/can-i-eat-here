@@ -17,6 +17,12 @@ helpers do
   def logged_in?
     !session[:current_user].nil?
   end
+
+  def ensure_logged_in!
+    unless logged_in?
+      halt 403, "You must be logged in to do that!"
+    end
+  end
 end
 
 get "/" do
@@ -39,11 +45,13 @@ post "/users" do
 end
 
 get "/restaurants/new" do
+  ensure_logged_in!
   @restaurant = current_user.restaurants.new
   erb :new_restaurant
 end
 
 post "/restaurants" do
+  ensure_logged_in!
   @restaurant = current_user.restaurants.create(params["restaurant"])
   if @restaurant.saved?
     redirect "/"
