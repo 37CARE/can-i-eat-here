@@ -13,9 +13,11 @@ class User
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String
-  property :email, String
-  property :password, String
+  property :name, String,  { :required => true }
+  property :email, String, { :required => true,
+                             :unique => true,
+                             :format => :email_address }
+  property :password, Text
 
   def password=(password)
     self.attribute_set(:password, BCrypt::Password.create(password))
