@@ -1,6 +1,23 @@
 /**
- * Form Styles
+ * Forms
  **/
 
 label { display: block; }
 label input { display: block; }
+
+/**
+ * Header
+ */
+
+header, nav { display: block; float: left; }
+header { width: 70%; }
+nav { width: 30%; }
+
+
+/**
+ * Main Content
+ */
+
+article#main-content {
+  clear: both;
+}

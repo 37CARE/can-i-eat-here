@@ -17,12 +17,14 @@ Add comments asking questions on lines of code.
 
 ## Functional Requirements
 
-1. A guest may register as a User
 1. A User may create a Restaurant
 1. A User may create a Restriction
 1. A User may tag a Restaurant With a SupportedRestriction
 1. A User may search for Restaurants by SupportedRestriction
 1. A User may search for Restaurants by Location
+
+### DONE!
+1. A guest may register as a User
 
 
 ## Running The Software

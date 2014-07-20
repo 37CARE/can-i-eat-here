@@ -53,3 +53,8 @@ post "/session" do
     erb :new_session
   end
 end
+
+delete "/session" do
+  session.delete(:current_user)
+  redirect "/"
+end

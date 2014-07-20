@@ -8,6 +8,18 @@
   <h1>Can I Eat Here?</h1>
   <p>A Directory of Restaurants That Cater To Your Dietary Needs</p>
 </header>
-<%= yield %>
+<nav>
+  <% if logged_in? %>
+    <form method="POST" action="/session">
+      <input type="hidden" name="_method" value="DELETE" />
+      <button>Log out</button>
+    </form>
+  <% else  %>
+    <p><a href="/users/new">Sign up</a> | <a href="/session/new">Log in</a></p>
+  <% end %>
+</nav>
+<article id="main-content">
+  <%= yield %>
+</article>
 </body>
 <html>
