@@ -1,0 +1,12 @@
+<h2>Add a Restaurant</h2>
+<form method="POST" action="/restaurants">
+  <label>Name:
+    <input type="text" name="restaurant[name]" value="<%=@restaurant.name%>" /></label>
+  <%= erb :_error, { :locals => { :model => @restaurant, :field_name => :name } } %>
+
+  <label>Address:
+    <input type="text" name="restaurant[address]" value="<%=@restaurant.address%>" /></label>
+  <%= erb :_error, { :locals => { :model => @restaurant, :field_name => :address } } %>
+
+  <button>Add Restaurant</button>
+</form>

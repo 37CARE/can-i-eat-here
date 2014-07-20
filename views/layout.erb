@@ -10,10 +10,12 @@
 </header>
 <nav>
   <% if logged_in? %>
-    <form method="POST" action="/session">
-      <input type="hidden" name="_method" value="DELETE" />
-      <button>Log out</button>
-    </form>
+    <p><a href="/restaurants/new">Add Restaurant</a>
+      <form method="POST" action="/session">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button>Log out</button>
+      </form>
+    </p>
   <% else  %>
     <p><a href="/users/new">Sign up</a> | <a href="/session/new">Log in</a></p>
   <% end %>

@@ -20,6 +20,7 @@ helpers do
 end
 
 get "/" do
+  @restaurants = Restaurant.all
   erb :home
 end
 
@@ -34,6 +35,20 @@ post "/users" do
     login(@user)
   else
     erb :new_user
+  end
+end
+
+get "/restaurants/new" do
+  @restaurant = current_user.restaurants.new
+  erb :new_restaurant
+end
+
+post "/restaurants" do
+  @restaurant = current_user.restaurants.create(params["restaurant"])
+  if @restaurant.saved?
+    redirect "/"
+  else
+    erb :new_restaurant
   end
 end
 
