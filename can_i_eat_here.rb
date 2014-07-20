@@ -2,12 +2,12 @@ require 'sinatra'
 require_relative 'models'
 
 get "/" do
-  erb :home, { :layout => :default_layout }
+  erb :home
 end
 
 get "/users/new" do
   @user = User.new
-  erb :new_user, { :layout => :default_layout }
+  erb :new_user
 
 end
 post "/users" do
