@@ -67,12 +67,14 @@ post "/restaurants" do
 end
 
 get "/restaurants/:restaurant_id/supported_restrictions/new" do
+  ensure_logged_in!
   @restaurant = Restaurant.get(params["restaurant_id"])
   @available_restrictions = Restriction.all
   erb :restaurants_new_supported_restriction
 end
 
 post "/restaurants/:restaurant_id/supported_restrictions" do
+  ensure_logged_in!
   restaurant = Restaurant.get(params["restaurant_id"])
   restriction = Restriction.get(params["supported_restriction"]["id"])
 
