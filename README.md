@@ -39,5 +39,6 @@ Add comments asking questions on lines of code.
 1. [Install the Heroku
    Toolbelt](https://devcenter.heroku.com/articles/quickstart#step-2-install-the-heroku-toolbelt)
 1. `heroku create`
+1. `heroku config:set SESSION_SECRET=$(ruby -r 'securerandom' -e 'puts SecureRandom.hex(256)')` - This sets a long, random string for the apps session secret.
 1. `git push heroku`
 1. `heroku open`

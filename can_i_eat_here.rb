@@ -1,7 +1,7 @@
 require 'sinatra'
+require_relative 'config/dotenv'
+require_relative 'config/session'
 require_relative 'models'
-
-enable :sessions
 
 helpers do
   def current_user
