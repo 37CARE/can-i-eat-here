@@ -11,7 +11,7 @@
 <nav>
   <% if logged_in? %>
     <p><a href="/restaurants/new">Add Restaurant</a>
-    <p><a href="/restriction/new">Add Dietary Restriction</a>
+    <p><a href="/restrictions/new">Add Restriction</a>
       <form method="POST" action="/session">
         <input type="hidden" name="_method" value="DELETE" />
         <button>Log out</button>
