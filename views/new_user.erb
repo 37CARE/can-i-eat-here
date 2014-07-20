@@ -8,6 +8,7 @@
     <input type="text" name="user[name]" value="<%=@user.name%>" /></label>
 
   <label>Password: <input type="password" name="user[password]" /></label>
+  <%= erb :_error, { :locals => { :model => @user, :field_name => :password } } %>
 
   <button>Sign Up</button>
 </form>

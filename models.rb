@@ -15,9 +15,7 @@ class User
   property :id, Serial
   property :name, String
   property :email, String
-  property :password, Text
-  # Switch password to a String field and try to sign up. Check out that
-  # awesome error!
+  property :password, String
 
   def password=(password)
     self.attribute_set(:password, BCrypt::Password.create(password))
