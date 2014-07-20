@@ -37,12 +37,12 @@ post "/users" do
   end
 end
 
-get "/sessions/new" do
+get "/session/new" do
   @login_attempt = User.new
   erb :new_session
 end
 
-post "/sessions" do
+post "/session" do
   @login_attempt = User.first({ :email => params[:user]["email"] })
 
   if @login_attempt && @login_attempt.password == params[:user]["password"]
