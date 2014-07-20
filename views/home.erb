@@ -1,6 +1,6 @@
 <p>Welcome!</p>
 
-<% unless session[:current_user] %>
+<% unless logged_in? %>
   <p>Maybe you want to <a href="/users/new">Sign up for an account?</a></p>
   <p>Or perhaps you want to <a href="/sessions/new">Log in?</a></p>
 <% end %>
