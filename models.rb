@@ -11,7 +11,7 @@ class User
   property :email, String, { :required => true,
                              :unique => true,
                              :format => :email_address }
-  property :password, Text
+  property :password, String, { :length => 255 }
 
   has n, :restaurants, { :child_key => [:creator_id] }
   has n, :created_restrictions, "Restriction", { :child_key => [:creator_id] }
