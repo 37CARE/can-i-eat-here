@@ -1,4 +1,5 @@
 require 'data_mapper'
+require 'graticule'
 require 'bcrypt'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'])
@@ -31,6 +32,8 @@ class Restaurant
   property :id, Serial
   property :name, String, { :required => true }
   property :address, Text, { :required => true }
+  property :latitude, Float
+  property :longitude, Float
 
   belongs_to :creator, 'User'
 
@@ -45,6 +48,21 @@ class Restaurant
     all(:name.like => "%#{query}%") |
       all(supported_restrictions.name.like => "%#{query}%") |
       all(:address.like => "%#{query}%")
+  end
+
+  def refresh_geolocation!
+    location = geocoder.locate(address)
+    self.latitude = location.latitude
+    self.longitude = location.longitude
+    self.save
+  end
+
+  def location
+    @location ||= Graticule::Location.new({ latitude: self.latitude, longitude: self.longitude })
+  end
+
+  def geocoder
+    @@geocoder ||= Graticule.service(:google).new ENV['GOOGLE_GEOCODER_API_KEY']
   end
 end
 

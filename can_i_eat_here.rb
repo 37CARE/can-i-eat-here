@@ -60,6 +60,7 @@ post "/restaurants" do
   ensure_logged_in!
   @restaurant = current_user.restaurants.create(params["restaurant"])
   if @restaurant.saved?
+    @restaurant.refresh_geolocation!
     redirect "/"
   else
     erb :new_restaurant
