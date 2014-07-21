@@ -12,18 +12,10 @@ class User
   property :email, String, { :required => true,
                              :unique => true,
                              :format => :email_address }
-  property :password, String, { :length => 255 }
+  property :password, BCryptHash
 
   has n, :restaurants, { :child_key => [:creator_id] }
   has n, :created_restrictions, "Restriction", { :child_key => [:creator_id] }
-
-  def password=(password)
-    self.attribute_set(:password, BCrypt::Password.create(password))
-  end
-
-  def password
-    BCrypt::Password.new(self.attribute_get(:password))
-  end
 end
 
 class Restaurant
