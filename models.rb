@@ -46,15 +46,10 @@ class Restaurant
     return restaurants unless options[:near]
 
     location = geocoder.locate(options[:near])
-    # We geocode the input the user gave us so we can compare distances
 
     restaurants.select do |restaurant|
       restaurant.near?(location)
     end
-    # `select` is a way to filter down a collection so it only includes things
-    # that evaluate to true within the block. Here it's saying "Only include
-    # restaurants whose `near` method returns true when passed the location
-    # someone searched for"
   end
 
   def near?(other_location)
