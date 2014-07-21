@@ -5,6 +5,11 @@
   <p>Or perhaps you want to <a href="/session/new">Log in?</a></p>
 <% end %>
 
+<form method="GET" action="/">
+  <input type="search" name="query" />
+  <button>Search</button>
+</form>
+
 <% @restaurants.each do |restaurant| %>
   <article class="restaurant">
     <h3><%=restaurant.name%></h3>

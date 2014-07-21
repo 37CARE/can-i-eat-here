@@ -40,6 +40,16 @@ class Restaurant
   def add_supported_restriction(restriction)
     self.restaurants_restrictions.first_or_create(:supported_restriction => restriction)
   end
+
+  def self.search(query)
+    all(:name.like => "%#{query}%") |
+      all(supported_restrictions.name.like => "%#{query}%") |
+      all(:address.like => "%#{query}%")
+
+      # Here we're building 3 queries using symbol-based conditions , and then
+      # using the "union" operator to join them different queries:
+      # http://datamapper.org/docs/find.html#combining-queries
+  end
 end
 
 class RestaurantsRestriction

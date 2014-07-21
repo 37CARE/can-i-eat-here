@@ -26,7 +26,7 @@ helpers do
 end
 
 get "/" do
-  @restaurants = Restaurant.all
+  @restaurants = Restaurant.search(params["query"])
   erb :home
 end
 
