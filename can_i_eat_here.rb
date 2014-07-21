@@ -26,7 +26,12 @@ helpers do
 end
 
 get "/" do
-  @restaurants = Restaurant.search(params["query"])
+  search_options = {}
+  if params["location"] && !params["location"].empty?
+    search_options[:near] = params["location"]
+  end
+
+  @restaurants = Restaurant.search(params["query"], search_options)
   erb :home
 end
 

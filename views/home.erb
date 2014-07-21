@@ -6,7 +6,11 @@
 <% end %>
 
 <form method="GET" action="/">
-  <input type="search" name="query" />
+  <label>I'm looking for...
+    <input type="search" name="query" value="<%= params["query"] %>" /></label>
+  <label>Near (leave blank for anywhere):
+    <input type="text" name="location" value="<%= params["location"] %>" /></label>
+
   <button>Search</button>
 </form>
 

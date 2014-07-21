@@ -19,6 +19,7 @@ class User
 end
 
 class Restaurant
+  SEARCH_RADIUS = 10
   include DataMapper::Resource
 
   property :id, Serial
@@ -36,10 +37,28 @@ class Restaurant
     self.restaurants_restrictions.first_or_create(:supported_restriction => restriction)
   end
 
-  def self.search(query)
-    all(:name.like => "%#{query}%") |
+  def self.search(query, options={})
+
+    restaurants = all(:name.like => "%#{query}%") |
       all(supported_restrictions.name.like => "%#{query}%") |
       all(:address.like => "%#{query}%")
+
+    return restaurants unless options[:near]
+
+    location = geocoder.locate(options[:near])
+    # We geocode the input the user gave us so we can compare distances
+
+    restaurants.select do |restaurant|
+      restaurant.near?(location)
+    end
+    # `select` is a way to filter down a collection so it only includes things
+    # that evaluate to true within the block. Here it's saying "Only include
+    # restaurants whose `near` method returns true when passed the location
+    # someone searched for"
+  end
+
+  def near?(other_location)
+    self.location.distance_to(other_location) <= SEARCH_RADIUS
   end
 
   def refresh_geolocation!
@@ -54,6 +73,10 @@ class Restaurant
   end
 
   def geocoder
+    self.class.geocoder
+  end
+
+  def self.geocoder
     @@geocoder ||= Graticule.service(:google).new ENV['GOOGLE_GEOCODER_API_KEY']
   end
 end
