@@ -1,0 +1,11 @@
+{
+  "category": "project",
+  "tags": [
+    "ruby",
+    "sinatra",
+    "heroku",
+    "web-apis",
+    "geolocation-and-mapping"
+  ],
+  "notes": "README doesn't conform to project format. Bundles project starter code and example."
+}
